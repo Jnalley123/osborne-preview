@@ -160,10 +160,14 @@
       const opt = [...sel.options].find((o) => o.value === res);
       if (opt) sel.value = res;
     }
-    // Where enquiries are emailed. Paste the form address from the email-forwarding service here,
-    // e.g. 'https://formspree.io/f/abcdwxyz'. While empty, the forms only show the thank-you (preview mode).
+    // Where enquiries are sent. Two options, same code path:
+    //   CEO Hub intake:   'https://<hub-host>/api/intake/website'   (see hub docs/WEBSITE_INTAKE.md)
+    //   Email forwarding: 'https://formspree.io/f/<form-id>'
+    // While empty, the forms only show the thank-you (preview mode).
     // Used by both the contact form and the private-list sign-up (form[data-list]).
     const ENDPOINT = '';
+    // Public key that tells the hub which business a submission belongs to. Not a secret.
+    const SITE_KEY = 'samuel-osborne';
 
     // hidden trap field: people never see it, bots fill it in
     const trap = Object.assign(document.createElement('input'), { name: '_gotcha', tabIndex: -1, autocomplete: 'off', hidden: true });
@@ -183,6 +187,7 @@
       const data = new FormData(form);
       if (!ENDPOINT || data.get('_gotcha')) return done();
       const list = form.hasAttribute('data-list');
+      data.append('site', SITE_KEY);
       data.append('form', list ? 'Private list sign-up' : 'Contact enquiry');
       data.append('_subject', (list ? 'Private list sign-up: ' : 'New enquiry: ') + data.get('first_name') + ' ' + data.get('last_name'));
       const btn = form.querySelector('[type="submit"]');
