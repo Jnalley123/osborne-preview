@@ -558,3 +558,8 @@ img.low { object-position: 50% 88%; }
 
 /* upright (portrait) floor plans */
 .plate.plan.tall { aspect-ratio: 3 / 5; }
+
+/* a heading that must stay on a single line: it shrinks on narrow screens instead of wrapping */
+.display.one-line { white-space: nowrap; }
+.d-xl.one-line { font-size: clamp(2rem, 10.4vw, 12.5rem); }
+.d-lg.one-line { font-size: clamp(2rem, 8vw, 8.5rem); }
