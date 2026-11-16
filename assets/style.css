@@ -536,3 +536,10 @@ body { overflow-x: clip; }
 @media (max-width: 1100px) { .process.five { grid-template-columns: repeat(2, 1fr); } .process.five > div { padding-bottom: 28px; border-bottom: 1px solid var(--line-light); } .process.five > div:nth-child(odd) { padding-left: 0; } .process.five > div:nth-child(even) { border-right: 0; } }
 @media (max-width: 900px) { .feat-list { grid-template-columns: repeat(2, 1fr); } .founders { grid-template-columns: repeat(2, minmax(0, 1fr)); } .founders .say { grid-column: 1 / -1; padding-left: 0; } }
 @media (max-width: 560px) { .feat-list, .process.five { grid-template-columns: 1fr; } .process.five > div { padding-left: 0; border-right: 0; } }
+
+/* menu slides away on scroll down, returns on scroll up */
+.site-head { transition: transform .5s var(--ease); will-change: transform; }
+.site-head.nav-hide { transform: translateY(calc(-100% - 40px)); }
+@media (prefers-reduced-motion: reduce) { .site-head { transition: none; } }
+/* hero: with the corner tag gone, keep the wordmark block clear of the menu */
+.hero-c .mid { margin-top: clamp(104px, 15vh, 150px); }

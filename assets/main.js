@@ -35,7 +35,18 @@
 
   // header state
   const head = document.querySelector('.site-head');
-  const onScroll = () => head && head.classList.toggle('scrolled', scrollY > 40);
+  // the menu slides away while scrolling down and returns on the first scroll back up
+  let lastY = scrollY;
+  const onScroll = () => {
+    if (!head) return;
+    const y = Math.max(0, scrollY);
+    head.classList.toggle('scrolled', y > 40);
+    if (Math.abs(y - lastY) > 4) {
+      head.classList.toggle('nav-hide', y > lastY && y > 90);
+      lastY = y;
+    }
+  };
+  if (head) head.addEventListener('focusin', () => head.classList.remove('nav-hide'));
   addEventListener('scroll', onScroll, { passive: true });
   onScroll();
 
