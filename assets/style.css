@@ -551,3 +551,7 @@ body { overflow-x: clip; }
 
 /* paired buttons on a home card */
 .acts-row { display: flex; flex-wrap: wrap; gap: 14px; margin: 0; }
+
+/* renderings with a lot of sky: frame on the house, not the clouds */
+img.low { object-position: 50% 88%; }
+.depth .plate img.low { transform-origin: 50% 80%; }
