@@ -543,3 +543,6 @@ body { overflow-x: clip; }
 @media (prefers-reduced-motion: reduce) { .site-head { transition: none; } }
 /* hero: with the corner tag gone, keep the wordmark block clear of the menu */
 .hero-c .mid { margin-top: clamp(104px, 15vh, 150px); }
+
+/* intro sentence sitting directly under a page heading */
+.page-hero .hero-lede { margin: clamp(20px, 2.6vw, 36px) 0 0; max-width: 46ch; }
