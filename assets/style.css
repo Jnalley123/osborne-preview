@@ -555,3 +555,6 @@ body { overflow-x: clip; }
 /* renderings with a lot of sky: frame on the house, not the clouds */
 img.low { object-position: 50% 88%; }
 .depth .plate img.low { transform-origin: 50% 80%; }
+
+/* upright (portrait) floor plans */
+.plate.plan.tall { aspect-ratio: 3 / 5; }
