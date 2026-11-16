@@ -548,3 +548,6 @@ body { overflow-x: clip; }
 .page-hero .hero-lede { margin: clamp(20px, 2.6vw, 36px) 0 0; max-width: 46ch; }
 /* the intro sentence takes the small gold capitals of the eyebrow line */
 .page-hero .hero-lede { font-family: var(--text); font-size: .72rem; letter-spacing: .32em; text-transform: uppercase; font-weight: 500; color: var(--brass); line-height: 2; max-width: 68ch; }
+
+/* paired buttons on a home card */
+.acts-row { display: flex; flex-wrap: wrap; gap: 14px; margin: 0; }
