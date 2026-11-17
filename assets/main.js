@@ -163,9 +163,9 @@
     // Where enquiries are sent. Two options, same code path:
     //   CEO Hub intake:   'https://<hub-host>/api/intake/website'   (see hub docs/WEBSITE_INTAKE.md)
     //   Email forwarding: 'https://formspree.io/f/<form-id>'
-    // While empty, the forms only show the thank-you (preview mode).
+    // If left empty, the forms only show the thank-you without sending anything.
     // Used by both the contact form and the private-list sign-up (form[data-list]).
-    const ENDPOINT = '';
+    const ENDPOINT = 'https://hub.keturn.site/api/intake/website';
     // Public key that tells the hub which business a submission belongs to. Not a secret.
     const SITE_KEY = 'samuel-osborne';
 
