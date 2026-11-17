@@ -569,3 +569,9 @@ img.low { object-position: 50% 88%; }
 .fig.sheet img { height: auto; object-fit: contain; display: block; }
 .fig.sheet:hover img { transform: none; }
 .gallery.one + .gallery.one, .plans + .gallery.one { margin-top: clamp(14px, 2vw, 32px); }
+
+/* privacy policy and terms: a quiet reading column */
+.legal { max-width: 860px; }
+.legal .eyebrow { margin-bottom: clamp(28px, 4vw, 48px); line-height: 1.9; }
+.legal p:not(.eyebrow) { font-size: 1.02rem; line-height: 1.85; color: var(--mute-light); margin: 0 0 1.35em; }
+.legal a { color: inherit; border-bottom: 1px solid currentColor; overflow-wrap: anywhere; }
