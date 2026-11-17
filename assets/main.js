@@ -187,6 +187,9 @@
       const data = new FormData(form);
       if (!ENDPOINT || data.get('_gotcha')) return done();
       const list = form.hasAttribute('data-list');
+      // send the wording the visitor chose ("1705 Edson Drive — Ventanas at Westlake"), not the short option code
+      const pick = form.querySelector('select[name="interest"]');
+      if (pick && pick.selectedOptions[0]) data.set('interest', pick.selectedOptions[0].textContent.trim().slice(0, 120));
       data.append('site', SITE_KEY);
       data.append('form', list ? 'Private list sign-up' : 'Contact enquiry');
       data.append('_subject', (list ? 'Private list sign-up: ' : 'New enquiry: ') + data.get('first_name') + ' ' + data.get('last_name'));
