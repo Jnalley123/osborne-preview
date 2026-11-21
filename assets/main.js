@@ -2,6 +2,18 @@
   const doc = document.documentElement;
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  // remember how the visitor arrived (an ad, a post, a site sign, an agent email) so an enquiry can say so.
+  // Links carry it as ?utm_source=instagram&utm_medium=social&utm_campaign=launch. Nothing personal is kept.
+  const SRC_KEY = 'soch-source';
+  const store = { get: () => { try { return localStorage.getItem(SRC_KEY) || ''; } catch (e) { return ''; } }, set: (v) => { try { localStorage.setItem(SRC_KEY, v); } catch (e) {} } };
+  {
+    const q = new URLSearchParams(location.search);
+    const tag = ['utm_source', 'utm_medium', 'utm_campaign'].map((k) => (q.get(k) || '').replace(/[^\w .-]/g, '').slice(0, 40)).filter(Boolean).join(' / ');
+    let ref = '';
+    try { const h = new URL(document.referrer).hostname.replace(/^www\./, ''); if (h && h !== location.hostname.replace(/^www\./, '')) ref = h; } catch (e) {}
+    if (tag) store.set(tag); else if (ref && !store.get()) store.set(ref);
+  }
+
   // intro curtain: never let it outstay its welcome, even if animations are throttled
   const curtain = document.querySelector('.curtain');
   if (curtain) {
@@ -190,6 +202,9 @@
       // send the wording the visitor chose ("1705 Edson Drive — Ventanas at Westlake"), not the short option code
       const pick = form.querySelector('select[name="interest"]');
       if (pick && pick.selectedOptions[0]) data.set('interest', pick.selectedOptions[0].textContent.trim().slice(0, 120));
+      // the hub has no separate field for the source, so it rides at the end of the message
+      const src = store.get();
+      if (src) data.set('message', (String(data.get('message') || '').slice(0, 3900) + '\n\n[Came from: ' + src + ']').trim());
       data.append('site', SITE_KEY);
       data.append('form', list ? 'Private list sign-up' : 'Contact enquiry');
       data.append('_subject', (list ? 'Private list sign-up: ' : 'New enquiry: ') + data.get('first_name') + ' ' + data.get('last_name'));
